@@ -20,7 +20,7 @@ def savefile(path):
     try:
         with open(os.path.join(cwd, path), "w",encoding="utf-8") as data:
             for elem in container:
-                data.write(f"\n{elem.name}, {elem.number}, {elem.coment}")
+                data.write(f"{elem.name}, {elem.number}, {elem.coment}\n")
             print("Файл успешно сохранен")
     except Exception as ex:
         print("Не удалось сохранить файл")
