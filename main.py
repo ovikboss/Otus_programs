@@ -9,6 +9,7 @@ def fileopen(path):
     try:
         with open(os.path.join(cwd, path), "r",encoding="utf-8") as data:
             text = data.readlines()
+            text = [line.rstrip() for line in text]
             for elem in text:
                 elem = elem.split(", ")
                 container.start(elem[0],elem[1],elem[2])
@@ -61,6 +62,27 @@ def showcon(name):
     except Exception as ex:
         print(ex)
 
+def change(id, param):
+    try:
+        for elem in container:
+            if elem.id == id:
+                match param:
+                    case "Номер":
+                        elem.number = int(input("Введите новый номер "))
+                        print(f"Пользователь {elem.name} изменен")
+                        break
+                    case "Имя":
+                        elem.name = input("Введите новое имя ")
+                        print(f"Пользователь {elem.name} изменен")
+                        break
+                    case "Комментарий":
+                        elem.coment = input("Введите новый комментарий ")
+                        print(f"Пользователь {elem.name} изменен")   
+                        break                
+        else:
+            print("Такого пользователя нет")
+    except Exception as ex:
+        print(ex)
 
 def main():
     while True:
@@ -71,7 +93,8 @@ def main():
 4. Удалить контакт
 5. Показать все контакты
 6. Показать контакт
-7. Остановить программу
+7. Изменить контакт
+8. Остановить программу
 """.strip())
         var = int(input())
         match var:
@@ -97,6 +120,11 @@ def main():
                 showcon(name)
                 input("что бы продолжить введите любой символ")
             case 7:
+                id = int(input("Введите id пользователя "))
+                param = input("Что будем менять? ")
+                change(id, param)
+                input("что бы продолжить введите любой символ")
+            case 8:
                 break
 
 if __name__ == "__main__":
