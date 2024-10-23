@@ -1,3 +1,5 @@
+from exceptions import NotValidInput
+
 class User:
     id = 0
     def __init__(self, name, number, coment) -> None:
@@ -43,10 +45,11 @@ class Contacts:
             else:
                 print("Контакт не найден")
         except Exception as ex:
-            print(ex)
+            print()
 
-    def remove_con(self, id:int) -> None:
+    def remove_con(self) -> None:
         try:
+            id = int(input("Введите id пользователя "))
             for elem in self.lst:
                 if elem.id == id:
                     self.lst.remove(elem)
@@ -55,7 +58,10 @@ class Contacts:
             else:
                 print("Такого пользователя нет")
         except Exception as ex:
-            print(ex)
+            try:
+                raise NotValidInput("Id должно быть числом")
+            except NotValidInput as ex:
+                print(ex)
 
     def change(self, id:int, param:str)->None:
         try:
@@ -77,7 +83,10 @@ class Contacts:
             else:
                 print("Такого пользователя нет")
         except Exception as ex:
-            print(ex)
+            try:
+                raise NotValidInput("Id должно быть числом")
+            except NotValidInput as ex:
+                print(ex)
 
     def clear_all(self) -> None:
         self.lst.clear()

@@ -1,5 +1,6 @@
 import os
 from models import Contacts
+from exceptions import ErrorPathName
 
 class Data_file():
     def file_open(self, path:str, cwd:str, container: Contacts) -> None:
@@ -12,7 +13,7 @@ class Data_file():
                     container.start(elem[0],elem[1],elem[2])
                 print("Файл успешно открыт")
         except Exception as ex:
-            print(ex)
+            raise ErrorPathName("Не удалось открыть файл")
 
     def save_file(self, path:str, cwd:str, container: Contacts ) -> None:
         try:
@@ -23,3 +24,4 @@ class Data_file():
                 print("Файл успешно сохранен")
         except Exception as ex:
             print("Не удалось сохранить файл")
+            raise ErrorPathName
