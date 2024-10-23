@@ -12,7 +12,7 @@ class User:
 
 class Contacts:
     lst = []
-    def newcontact(self):
+    def new_contact(self):
         name = input("Введите имя ")
         number = int(input("Введите номер телефона "))
         coment = input("Введите коментарий ")
