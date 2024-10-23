@@ -5,7 +5,7 @@ clear = lambda:os.system("cls")
 cwd = os.getcwd()
 container = Contacts()
 
-def file_open(path):
+def file_open(path:str) -> None:
     try:
         with open(os.path.join(cwd, path), "r",encoding="utf-8") as data:
             text = data.readlines()
@@ -17,7 +17,7 @@ def file_open(path):
     except Exception as ex:
         print(ex)
 
-def save_file(path):
+def save_file(path:str) -> None:
     try:
         with open(os.path.join(cwd, path), "w",encoding="utf-8") as data:
             for elem in container:
@@ -27,13 +27,13 @@ def save_file(path):
     except Exception as ex:
         print("Не удалось сохранить файл")
 
-def add_contact():
+def add_contact() -> None:
     try:
         container.new_contact()
     except Exception as ex:
         print("Не правильный ввод")
 
-def remove_con(id):
+def remove_con(id:int) -> None:
     try:
         for elem in container:
             if elem.id == id:
@@ -45,14 +45,14 @@ def remove_con(id):
     except Exception as ex:
         print(ex)
 
-def show_all():
+def show_all() -> None:
     try:
         for elem in container:
             print(elem)
     except Exception as ex:
         print("Ошибка")
 
-def show_con(name):
+def show_con(name) -> None:
     try:
         for elem in container:
             if elem.name == name:
@@ -63,7 +63,7 @@ def show_con(name):
     except Exception as ex:
         print(ex)
 
-def change(id, param):
+def change(id:int, param:str)->None:
     try:
         for elem in container:
             if elem.id == id:
@@ -85,7 +85,7 @@ def change(id, param):
     except Exception as ex:
         print(ex)
 
-def main():
+def main() -> None:
     var = ""
     while var != 8:
         clear()
