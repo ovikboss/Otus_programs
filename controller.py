@@ -1,9 +1,14 @@
 import os
-from models import Contacts
+from models import Contacts_Collection
 from exceptions import ErrorPathName
 
 class Data_file():
-    def file_open(self, path:str, cwd:str, container: Contacts) -> None:
+    """Класс отвечает за открытие, чтение , запись, и закрытие файлов"""
+    def file_open(self, path:str, cwd:str, container: Contacts_Collection) -> None:
+        """Открывает файл и сохраняет все данные 
+        из него ввиде пользователей(контактов)
+        после чего закрывает его"""
+
         try:
             with open(os.path.join(cwd, path), "r",encoding="utf-8") as data:
                 text = data.readlines()
@@ -13,9 +18,15 @@ class Data_file():
                     container.start(elem[0],elem[1],elem[2])
                 print("Файл успешно открыт")
         except Exception as ex:
-            raise ErrorPathName("Не удалось открыть файл")
+            try:
+                raise ErrorPathName("Не удалось открыть файл")
+            except ErrorPathName as ex:
+                print(ex)
 
-    def save_file(self, path:str, cwd:str, container: Contacts ) -> None:
+    def save_file(self, path:str, cwd:str, container: Contacts_Collection ) -> None:
+        """Открывает файл на запись после чего переводит 
+        всех пользоватей из коллекции в формат 
+        под запись, после чего закрывает файл"""
         try:
             with open(os.path.join(cwd, path), "w",encoding="utf-8") as data:
                 for elem in container:
@@ -23,5 +34,8 @@ class Data_file():
                 container.clear_all()
                 print("Файл успешно сохранен")
         except Exception as ex:
-            print("Не удалось сохранить файл")
-            raise ErrorPathName
+            try:
+                raise ErrorPathName("Не удалось сохранить файл")
+            except ErrorPathName as ex:
+                print(ex)
+            

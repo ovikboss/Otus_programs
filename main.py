@@ -1,17 +1,18 @@
 import os
-from models import  Contacts
+from models import  Contacts_Collection
 from controller import Data_file
 
 clear = lambda:os.system("cls")
 cwd = os.getcwd()
-container = Contacts()
+container = Contacts_Collection()
 data_manager = Data_file()
 
 
 def main() -> None:
+    """Основная программа"""
     var = ""
     while var != 8:
-        clear()
+        #clear()
         print("""1. Открыть файл
 2. Сохранить файл
 3. Добавить контакт
@@ -32,7 +33,7 @@ def main() -> None:
                     data_manager.save_file(path, cwd, container)
                     input("что бы продолжить введите любой символ")
                 case 3:
-                    container.add_contact()
+                    container.new_contact()
                     input("что бы продолжить введите любой символ")
                 case 4:
                     container.remove_con()
