@@ -1,9 +1,11 @@
 import os
 from models import  Contacts
+from controller import Data_file
 
 clear = lambda:os.system("cls")
 cwd = os.getcwd()
 container = Contacts()
+data_manager = Data_file()
 
 def file_open(path:str) -> None:
     try:
@@ -22,68 +24,10 @@ def save_file(path:str) -> None:
         with open(os.path.join(cwd, path), "w",encoding="utf-8") as data:
             for elem in container:
                 data.write(f"{elem.name}, {elem.number}, {elem.coment}\n")
-            container.lst.clear()
+            container.clear_all()
             print("Файл успешно сохранен")
     except Exception as ex:
         print("Не удалось сохранить файл")
-
-def add_contact() -> None:
-    try:
-        container.new_contact()
-    except Exception as ex:
-        print("Не правильный ввод")
-
-def remove_con(id:int) -> None:
-    try:
-        for elem in container:
-            if elem.id == id:
-                container.lst.remove(elem)
-                print(f"Пользователь {elem.name} удален")
-                break
-        else:
-            print("Такого пользователя нет")
-    except Exception as ex:
-        print(ex)
-
-def show_all() -> None:
-    try:
-        for elem in container:
-            print(elem)
-    except Exception as ex:
-        print("Ошибка")
-
-def show_con(name) -> None:
-    try:
-        for elem in container:
-            if elem.name == name:
-                print(elem)
-                break
-        else:
-            print("Контакт не найден")
-    except Exception as ex:
-        print(ex)
-
-def change(id:int, param:str)->None:
-    try:
-        for elem in container:
-            if elem.id == id:
-                match param:
-                    case "Номер":
-                        elem.number = int(input("Введите новый номер "))
-                        print(f"Пользователь {elem.name} изменен")
-                        break
-                    case "Имя":
-                        elem.name = input("Введите новое имя ")
-                        print(f"Пользователь {elem.name} изменен")
-                        break
-                    case "Комментарий":
-                        elem.coment = input("Введите новый комментарий ")
-                        print(f"Пользователь {elem.name} изменен")   
-                        break                
-        else:
-            print("Такого пользователя нет")
-    except Exception as ex:
-        print(ex)
 
 def main() -> None:
     var = ""
@@ -103,29 +47,29 @@ def main() -> None:
             match var:
                 case 1:
                     path = input("Введите имя файла ")
-                    file_open(path)
+                    data_manager.file_open(path, cwd, container)
                     input("что бы продолжить введите любой символ")
                 case 2:
-                    save_file(path)
+                    data_manager.save_file(path, cwd, container)
                     input("что бы продолжить введите любой символ")
                 case 3:
-                    add_contact()
+                    container.add_contact()
                     input("что бы продолжить введите любой символ")
                 case 4:
                     id = int(input("Введите id пользователя "))
-                    remove_con(id)
+                    container.remove_con(id)
                     input("что бы продолжить введите любой символ")
                 case 5:
-                    show_all()
+                    container.show_all()
                     input("что бы продолжить введите любой символ")
                 case 6:
                     name = input("Введите имя ")
-                    show_con(name)
+                    container.show_con(name)
                     input("что бы продолжить введите любой символ")
                 case 7:
                     id = int(input("Введите id пользователя "))
-                    param = input("Что будем менять? ")
-                    change(id, param)
+                    param = input("Что будем менять Номер, Имя, Комментарий? ")
+                    container.change(id, param)
                     input("что бы продолжить введите любой символ")
         except Exception as ex:
             print(ex)
