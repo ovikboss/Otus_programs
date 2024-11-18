@@ -1,3 +1,5 @@
 __pycache__/
 text.txt
 __pycache__/models.cpython-311.pyc
+.venv
+.pytest_cache

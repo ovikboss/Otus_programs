@@ -1,5 +1,6 @@
 from exceptions import NotValidInput
 
+
 class Contact:
     """""Класс отвечает за создание модели контакта"""
     id = 0
@@ -12,6 +13,13 @@ class Contact:
     
     def __str__(self) -> str:
         return f"ID: {self.id}\nИмя: {self.name}\nНомер: {self.number}\nКоментарий: {self.coment}"
+    
+    def __eq__(self, value: object) -> bool:
+        if isinstance(value, Contact):
+            return self.number, self.name, self.coment == value.number, value.name, value.coment
+        else:
+            return "Вы сравниваете не обьекты класса контакт"
+
 
 class Contacts_Collection:
     """Класс отвечает за хранение контактов и действий связанных с ними"""
