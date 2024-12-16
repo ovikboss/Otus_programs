@@ -36,20 +36,20 @@ def main() -> None:
                     container.new_contact()
                     input("что бы продолжить введите любой символ")
                 case 4:
-                    container.remove_con()
+                    print(container.remove_con())
                     input("что бы продолжить введите любой символ")
 
                 case 5:
-                    container.show_all()
+                    print(*container.show_all(),sep="\n")
                     input("что бы продолжить введите любой символ")
                 case 6:
                     name = input("Введите имя ")
-                    container.show_con(name)
+                    print(container.show_con(name))
                     input("что бы продолжить введите любой символ")
                 case 7:
                     id = int(input("Введите id пользователя "))
                     param = input("Что будем менять Номер, Имя, Комментарий? ")
-                    container.change(id, param)
+                    print(container.change(id, param))
                     input("что бы продолжить введите любой символ")
         except Exception as ex:
             print(ex)
